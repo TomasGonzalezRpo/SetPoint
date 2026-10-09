@@ -1,0 +1,8 @@
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+pydantic-settings==2.15.0
+supabase==2.32.0
+pyjwt==2.15.1
+httpx==0.28.1
+google-auth==2.60.0
+requests==2.34.2

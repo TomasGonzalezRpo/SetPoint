@@ -36,11 +36,32 @@ SetPoint/
     └── migrations/     SQL del esquema
 ```
 
+## Reglas de negocio (viven en la BD)
+
+- Inscribir = `alumno_id` + `plan_id`; tipo, minutos, precio y vencimiento se copian solos.
+- Una clase `dada` o `falta_cobrada` descuenta minutos; si no alcanza el saldo, se rechaza.
+- La clase debe ser del mismo alumno que el plan y hereda su tipo.
+- Clase sin plan = suelta: precio automático = tarifa/hora × duración.
+- `inscripcion_para_clase()` elige el plan a usar (el que vence primero con saldo).
+- Nada con historial se borra: se desactiva o cancela.
+- Fechas en hora de Colombia (`hoy()`).
+- Vistas: `v_alumnos_resumen` (estado_plan, deuda), `v_inscripciones`, `v_dashboard`.
+
+## Desarrollo
+
+```bash
+cd backend
+python -m venv .venv && .venv\Scripts\activate   # Windows
+pip install -r requirements-dev.txt
+pytest                       # pruebas
+uvicorn app.main:app --reload
+```
+
 ## Roadmap
 
 - [x] Paso 1 — Estructura y esquema de BD
-- [ ] Paso 2 — Backend base + autenticación Google
-- [ ] Paso 3 — API: alumnos, paquetes, inscripciones, clases, pagos, dashboard
+- [x] Paso 2 — Backend base + autenticación Google
+- [ ] Paso 3 — API: alumnos, planes, inscripciones, clases, pagos, dashboard
 - [ ] Paso 4 — Frontend base: layout, diseño, login, proxy
 - [ ] Paso 5 — Pantallas
 - [ ] Paso 6 — PWA

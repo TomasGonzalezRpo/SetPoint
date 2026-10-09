@@ -19,3 +19,6 @@ dev-dist/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Pruebas
+.pytest_cache/
